@@ -78,15 +78,18 @@ Car.prototype.fill = function (gallons) {
   this.tank += gallons;
 };
 Car.prototype.drive = function (distance) {
+  let distanceDrove = 0;
   if (this.tank * this.milesPerGallon >= distance) {
     this.odometer += distance;
     this.tank -= (distance / this.milesPerGallon);
+    distanceDrove = distance;
   } else {
-    this.odometer += this.tank * this.milesPerGallon;
+    distanceDrove = this.tank * this.milesPerGallon;
+    this.odometer += distanceDrove;
     this.tank = 0;
   }
 
-  return `You drove ${this.odometer} miles`;
+  return `You drove ${distanceDrove} miles`;
 };
 /*
   TASK 3
