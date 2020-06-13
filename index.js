@@ -39,12 +39,23 @@ Airplane.prototype.land = function () {
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
 
-function Person() {
-
+function Person(name, age) {
+  this.stomach = [];
+  this.age = age;
+  this.name = name;
 }
-
+Person.prototype.eat = function (item) {
+  this.stomach.push(item);
+  if (this.stomach.length > 10) this.poop();
+};
+Person.prototype.poop = function () {
+  this.stomach = [];
+};
+Person.prototype.toString = function () {
+  return `Name: ${this.name}, Age: ${this.age}`;
+};
 /*
-  TASK 2
+  TASK 2ss
     - Write a Car constructor that initializes `model` and `milesPerGallon` from arguments.
     - All instances built with Car:
         + should initialize with an `tank` at 0
@@ -57,10 +68,26 @@ function Person() {
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
-
+function Car(model, milesPerGallon) {
+  this.model = model;
+  this.milesPerGallon = milesPerGallon;
+  this.tank = 0;
+  this.odometer = 0;
 }
+Car.prototype.fill = function (gallons) {
+  this.tank += gallons;
+};
+Car.prototype.drive = function (distance) {
+  if (this.tank * this.milesPerGallon >= distance) {
+    this.odometer += distance;
+    this.tank -= (distance / this.milesPerGallon);
+  } else {
+    this.odometer += this.tank * this.milesPerGallon;
+    this.tank = 0;
+  }
 
+  return `You drove ${this.odometer} miles`;
+};
 /*
   TASK 3
     - Write a Baby constructor subclassing Person.
@@ -68,10 +95,19 @@ function Car() {
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {
+function Baby(name, age, favoriteToy) {
+  Person.call(this, "Richard", "31");
 
+  this.name = name;
+  this.age = age;
+  this.favoriteToy = favoriteToy;
 }
 
+Baby.prototype = Object.create(Person.prototype);
+
+Baby.prototype.play = function () {
+  return `Playing with ${this.favoriteToy}`;
+};
 /* 
   TASK 4
 
