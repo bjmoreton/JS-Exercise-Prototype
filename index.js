@@ -99,10 +99,8 @@ Car.prototype.drive = function (distance) {
         + Should return a string "Playing with x", x being the favorite toy.
 */
 function Baby(name, age, favoriteToy) {
-  Person.call(this, "Richard", "31");
+  Person.call(this, name, age);
 
-  this.name = name;
-  this.age = age;
   this.favoriteToy = favoriteToy;
 }
 
@@ -115,10 +113,10 @@ Baby.prototype.play = function () {
   TASK 4
 
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. window binding - if none of the other rules apply this defaults to the window.
+  2. Implicit binding - most common rule found in 80% of use cases, left of the dot.
+  3. Explicit binding - call, apply, bind
+  4. New binding - using the "new" keyword
 */
 
 
