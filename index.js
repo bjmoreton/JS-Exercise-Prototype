@@ -45,8 +45,9 @@ function Person(name, age) {
   this.name = name;
 }
 Person.prototype.eat = function (item) {
-  if (this.stomach.length === 10) return;
-  this.stomach.push(item);
+  if (this.stomach.length < 10) {
+    this.stomach.push(item);
+  }
 };
 Person.prototype.poop = function () {
   this.stomach = [];
@@ -55,7 +56,7 @@ Person.prototype.toString = function () {
   return `Name: ${this.name}, Age: ${this.age}`;
 };
 /*
-  TASK 2ss
+  TASK 2
     - Write a Car constructor that initializes `model` and `milesPerGallon` from arguments.
     - All instances built with Car:
         + should initialize with an `tank` at 0
@@ -100,7 +101,6 @@ Car.prototype.drive = function (distance) {
 */
 function Baby(name, age, favoriteToy) {
   Person.call(this, name, age);
-
   this.favoriteToy = favoriteToy;
 }
 
